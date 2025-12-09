@@ -17,6 +17,7 @@ Superplasticizer | component 5 | kg (in a cubic meter of concrete)
 Coarse Aggregate | component 6 | kg (in a cubic meter of concrete)
 Fine Aggregate | component 7 | kg (in a cubic meter of concrete)
 Age | Age of concrete | Day (1~365)
+Concrete compressive strength | Target variable | [MPa](https://www.sensorsone.com/mpa-megapascal-pressure-unit/)
 
 ## Executive Summary
 
@@ -48,7 +49,7 @@ However, we can also see that most of the values are in the early days of the co
 ![age vs concrete strength](./images/age_concrete.png)
 
 ## Conclusions/Recommendations
-To model the algorithims to predict the strength of the concrete, I used Linear Regression (Ridge and Lasso as well), Random Forest, and K Nearest Neighbors.
+To model the algorithims to predict the strength of the concrete, I used Linear Regression (Ridge and Lasso as well), Random Forest, and K Nearest Neighbors (KNN).
 
 I used GridSearchCV to cross validate the the models in order to get the best performing model to evaluate. 
 
@@ -56,12 +57,11 @@ Random Forest performed the best out of the 5. Results are below.
 
 | Model | R2 | RMSE |
 | ----- | -- | ---- |
+| Random Forest | 0.89 | 5.49 |
+| KNN | 0.77 | 7.84 |
 | Linear Regression | 0.625 | 10.08 |
 | Ridge Regression | 0.625 | 10.08 |
 | Lasso Regression | 0.625 | 10.08 |
-| Random Forest | 0.89 | 5.49 |
-| Linear Regression | 0.77 | 7.84 |
-
 
 For more information on the models and their parameters, please see the regression notebook. 
 
