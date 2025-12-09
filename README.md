@@ -1,12 +1,11 @@
 # Concrete-Strength
 
 ## Problem Statement
-- Provide a brief background or context for your analysis. Explain why the data is relevant or interesting.
+- This dataset includes information about concrete strenth and the ingredients used to create the concrete. 
 
-- Clearly state the purpose of your analysis. What are you aiming to achieve or communicate through this analysis? Who would this benefit?
+- The purpose of this analysis and modeling is to see which ingredients (and proportions) will create the best concrete.
 
 ## Data Dictionary
-Include a data dictionary to explain the meaning of each variable or field in the dataset. You can also link to an external data dictionary.
 
 | Column Name | Description | Units |
 |-------------|-------------| ----- |
@@ -22,23 +21,49 @@ Age | Age of concrete | Day (1~365)
 ## Executive Summary
 
 ### Data Cleaning Steps
-Outline the steps taken to clean and preprocess the data before analysis.
+The data included an unneccesary column (Unnamed: 32) which was dropped from the data. There was also around 379 missing values for Superplasticizer, which was filled in with 0s, as the missing values were clerical errors. 
+
+Superplastizer Before
+![superplasticizer before](./images/superplasticizer_before.png)
+
+Superplastizer After
+![superplasticizer after](./images/superplasticizer_after.png)
+
+After filling in the missing values with 0s, we can see the effect that had on the distribution. 
+
+The number of outliers reduced to just 2 and the bounds of what was considered an outlier also changed. 
 
 ### Key Visualizations
-Include key visualizations that highlight important aspects of the data. Use graphs, charts, or any other visual representation to make your points.
 
-#### Visualization 1: [Title]
-[Description and interpretation of the first visualization.]
+#### Visualization 1: [Cement vs Concrete Strength]
+This visualization shows the affect the number of Cement kg per cubic meter in Concrete has on the strength of it. The correlation coefficent is 0.5, which is a moderate positive correlation. This means as the amount of cement increases, so does the strength. 
 
-![Visualization 1](path/to/image1.png)
+![Cement vs Concrete Strength](./images/cement_concrete.png)
 
-#### Visualization 2: [Title]
-[Description and interpretation of the second visualization.]
+#### Visualization 2: [Age vs Concrete Strength]
+We see the same with Age and the strength of the concrete. It seems that over time, concrete gets stronger, as it has time to harden. 
 
-![Visualization 2](path/to/image2.png)
+However, we can also see that most of the values are in the early days of the concrete. On the far right of the plot, we see the strength going down, which likely happens after it completes hardening, and starts to deteriorate. 
+
+![age vs concrete strength](./images/age_concrete.png)
 
 ## Conclusions/Recommendations
-Summarize the main findings from your analysis. If applicable, provide recommendations based on the insights gained from the data.
+To model the algorithims to predict the strength of the concrete, I used Linear Regression (Ridge and Lasso as well), Random Forest, and K Nearest Neighbors.
+
+I used GridSearchCV to cross validate the the models in order to get the best performing model to evaluate. 
+
+Random Forest performed the best out of the 5. Results are below. 
+
+| Model | R2 | RMSE |
+| ----- | -- | ---- |
+| Linear Regression | 0.625 | 10.08 |
+| Ridge Regression | 0.625 | 10.08 |
+| Lasso Regression | 0.625 | 10.08 |
+| Random Forest | 0.89 | 5.49 |
+| Linear Regression | 0.77 | 7.84 |
+
+
+For more information on the models and their parameters, please see the regression notebook. 
 
 ## Additional Information
 Include any additional information, references, or resources that might be relevant for understanding the analysis.
